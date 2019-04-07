@@ -1,0 +1,107 @@
+[
+  {
+    "id": "ISR-6090",
+    "from": "Tel-Aviv",
+    "to": "Barcelona",
+    "departure": "2018-02-25 21:40",
+    "arrival": "2018-02-26 1:20",
+    "by": "El Al"
+  },
+  {
+    "id": "ISR-5030",
+    "from": "Tel-Aviv",
+    "to": "Bogota",
+    "departure": "2018-02-25 22:40",
+    "arrival": "2018-02-27 1:20",
+    "by": "El Al"
+  },
+  {
+    "id": "ISR-5527",
+    "from": "Tel-Aviv",
+    "to": "Milano",
+    "departure": "2018-02-28 21:40",
+    "arrival": "2018-02-29 1:20",
+    "by": "El Al"
+  },
+  {
+    "id": "LY-66829",
+    "from": "Tel-Aviv",
+    "to": "Budapest",
+    "departure": "2018-03-01 21:40",
+    "arrival": "2018-03-02 3:20",
+    "by": "El Al"
+  },
+  {
+    "id": "LY-32910",
+    "from": "Tel-Aviv",
+    "to": "Amsterdam",
+    "departure": "2018-03-02 12:40",
+    "arrival": "2018-03-02 16:20",
+    "by": "El Al"
+  },
+  {
+    "id": "LY-98271",
+    "from": "Tel-Aviv",
+    "to": "Hong-Kong",
+    "departure": "2018-03-02 13:40",
+    "arrival": "2018-03-02 22:20",
+    "by": "El Al"
+  },
+  {
+    "id": "LY-98271",
+    "from": "Tel-Aviv",
+    "to": "New-York",
+    "departure": "2018-03-02 13:40",
+    "arrival": "2018-03-02 17:20",
+    "by": "El Al"
+  },
+  {
+    "id": "IND-791",
+    "from": "Mumbai",
+    "to": "Tel-Aviv",
+    "departure": "2018-03-27 13:40",
+    "arrival": "2018-03-28 1:20",
+    "by": "Air India"
+  },
+  {
+    "id": "IND-795",
+    "from": "Tel-Aviv",
+    "to": "Mumbai",
+    "departure": "2018-03-28 15:00",
+    "arrival": "2018-03-27 22:20",
+    "by": "Air India"
+  },
+  {
+    "id": "FRC-500",
+    "from": "Tel-Aviv",
+    "to": "Paris",
+    "departure": "2018-03-20 15:00",
+    "arrival": "2018-03-20 19:20",
+    "by": "Air France"
+  },
+  {
+    "id": "FRC-430",
+    "from": "Paris",
+    "to": "Tel-Aviv",
+    "departure": "2018-03-20 16:00",
+    "arrival": "2018-03-20 20:45",
+    "by": "Air France"
+  },
+  {
+    "id": "ANT-430",
+    "from": "Paris",
+    "to": "Antarctica",
+    "departure": "2018-03-22 14:00",
+    "arrival": "2018-03-22 20:45",
+    "by": "Antarctica Air"
+  },
+  {
+    "id": "ANT-431",
+    "from": "Antarctica",
+    "to": "Tel-Aviv",
+    "departure": "2018-03-23 10:00",
+    "arrival": "2018-03-23 20:45",
+    "by": "Antarctica Air"
+  }
+
+]

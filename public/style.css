@@ -1,0 +1,39 @@
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 3px solid purple;  
+}
+th, td {
+  padding: 20px;
+  border: 1px solid purple;
+  text-align: center;
+}
+.headBtn{
+  height: 100%;
+  width: 20%;
+  float: right;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid black;
+}
+img{
+  height: 100%;
+  width: 100%;
+}
+label{
+  font-weight: bold;
+}
+#from{
+  margin-right: 20px;
+}
+#until{
+  margin-right: 10px;
+}
+#showAll{
+  float: right;
+}
