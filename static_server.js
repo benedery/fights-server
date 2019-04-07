@@ -16,6 +16,14 @@ http.createServer(function (req, res) {
     const fileName = reqUrl.pathname.substr(1);
     const cType = contentTypes.get(ext);
 
+// before write data
+    if (cType === "application/json"){
+       let obj = JSON.parse(fs.readFileSync('public/' + fileName, 'utf8'));
+       console.log(typeof obj);
+       
+    }
+  
+
     fs.readFile('public/' + fileName, function (err, data) {
         if (err) {
             if (err.code == 'ENOENT') {
