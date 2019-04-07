@@ -16,14 +16,6 @@ http.createServer(function (req, res) {
     const fileName = reqUrl.pathname.substr(1);
     const cType = contentTypes.get(ext);
 
-// before write data
-    if (cType === "application/json"){
-       let obj = JSON.parse(fs.readFileSync('public/' + fileName, 'utf8'));
-       console.log(typeof obj);
-       
-    }
-  
-
     fs.readFile('public/' + fileName, function (err, data) {
         if (err) {
             if (err.code == 'ENOENT') {
@@ -36,6 +28,21 @@ http.createServer(function (req, res) {
             }
         } else {
             res.writeHead(200, { 'Content-Type': cType });
+            if (cType === "application/json") {
+                let newObj = fs.readFileSync('public/' + fileName, 'utf8').toLowerCase();
+                let obj = JSON.parse(newObj);
+                if (reqUrl.search !== null) {
+                let searchUrl = reqUrl.search.split("?search=")[1].toLowerCase();
+                let foundByquery = [];
+                for (let i = 0; i < obj.length; i++) {
+                    if (obj[i].from === searchUrl || obj[i].to === searchUrl) {
+                        foundByquery.push(obj[i]);
+                    }
+                }
+                let strObj = JSON.stringify(foundByquery)
+                data = strObj;
+            }
+            }
             res.write(data);
         }
         res.end();
@@ -43,3 +50,4 @@ http.createServer(function (req, res) {
 }).listen(8080, function () {
     console.log('Client is available at http://localhost:8080');
 });
+
