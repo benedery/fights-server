@@ -1,30 +1,12 @@
 'use strict';
 let flightObjectsArray = [];
 let imageSrc = 'sort-down.png';
-
-class Flight {
-    constructor(flightId, from, to, departure, arrival, by) {
-        this.flightId = flightId;
-        this.from = from;
-        this.to = to;
-        this.departure = departure;
-        this.arrival = arrival;
-        this.by = by;
-    }
-}
-
-const createFlightObject = (flight) => {
-    return new Flight(flight.id, flight.from, flight.to, flight.departure, flight.arrival, flight.by);
-};
-
-const createFlightsObjectsArray = (flights) => {
-    flights.forEach(flight => flightObjectsArray = [...flightObjectsArray, createFlightObject(flight)]);
-};
+const HEAD_NAMES = ['id', 'from', 'to', 'departure', 'arrival', 'by'];
 
 const compareByHeadName = (headName) => {
     return function (a, b) {
-        let headNameA = a[headName];
-        let headNameB = b[headName];
+        let headNameA = a[headName].toUpperCase();
+        let headNameB = b[headName].toUpperCase();
         let comparison = 0;
         if (imageSrc === 'sort-down.png') {
             if (headNameA > headNameB) {
@@ -55,19 +37,12 @@ const setHeadImageSource = () => {
     document.querySelectorAll('img').forEach(img => img.src = imageSrc);
 };
 
-const createTableHead = (flight) => {
-    let TableHead = ``;
-    let numOfHeadNames = Object.getOwnPropertyNames(flight).length;
-    Object.getOwnPropertyNames(flight).forEach((name, index) => {
-        TableHead +=
-            `<th scope="col" width: "${100 / numOfHeadNames}%";>
-                ${name.toUpperCase()}
-                <button id=${index} class="headBtn" onClick="sortByHead(this)">
-                    <img src=${imageSrc}>
-                </button>
-            </th>`;
+const setTableColumnSize = () => {
+    let columnSize = 100 / HEAD_NAMES.length;
+    columnSize += '%';
+    document.querySelectorAll('th').forEach(head => {
+        head.style.width = columnSize;
     });
-    document.querySelector('thead').innerHTML = `<tr>${TableHead}<tr>`;
 };
 
 const createTableRow = (flight) => {
@@ -99,7 +74,7 @@ function sortByHead(elemnt) {
     if (flightObjectsArray.length === 0)
         return;
 
-    let headName = Object.getOwnPropertyNames(flightObjectsArray[0])[elemnt.id];
+    let headName = HEAD_NAMES[elemnt.id];
     flightObjectsArray.sort(compareByHeadName(headName));
     imageSrc = changeImageSource();
     setHeadImageSource();
@@ -114,7 +89,6 @@ document.getElementById('datesBtn').addEventListener('click', () => {
 });
 
 const showAllflights = () => {
-    document.querySelector('thead').innerHTML = ``;
     flightObjectsArray = [];
 
     fetch('flights.json')
@@ -122,14 +96,32 @@ const showAllflights = () => {
             return response.json();
         })
         .then(function (myJson) {
-            createFlightsObjectsArray(myJson);
-            createTableHead(flightObjectsArray[0]);
+            flightObjectsArray = [...myJson];
+            setTableColumnSize();
             createTableBody(flightObjectsArray);
 
         });
 };
 
-document.getElementById('showAll').addEventListener('click', showAllflights);
+const searchByCity = () => {
+    let cityName = document.getElementById('searchInput').value;
+    cityName = cityName.replace(' ', '-');
+    let query = `/?search=${cityName}`;
+    flightObjectsArray = [];
+
+    fetch('flights.json' + query)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            flightObjectsArray = [...myJson];
+            createTableBody(flightObjectsArray);
+
+        });
+};
+
+document.getElementById('showAllBtn').addEventListener('click', showAllflights);
+document.getElementById('searchBtn').addEventListener('click', searchByCity);
 
 showAllflights();
 

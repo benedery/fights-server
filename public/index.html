@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Template</title>
+    <title>Fights Server</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -15,9 +15,48 @@
         <input type="date" id="until">
     </label>
     <button id="datesBtn">SHOW FLITHS BETWEEN DATES</button>
-    <button id="showAll">SHOW ALL FLITHS</button>
+    <button id="showAllBtn">SHOW ALL FLITHS</button>
+    <div class="searchByCity">
+        <label for="searchInput"><b></b>SEARCH BY CITY:
+            <input type="text" id="searchInput">
+        </label>
+        <button id="searchBtn">SEARCH</button>
+    </div>
     <table>
-        <thead></thead>
+        <thead>
+            <tr>
+                <th>No.
+                    <button id="0" class="headBtn" onClick="sortByHead(this)">
+                        <img src="sort-down.png">
+                    </button>
+                </th>
+                <th>From
+                    <button id="1" class="headBtn" onClick="sortByHead(this)">
+                        <img src="sort-down.png">
+                    </button>
+                </th>
+                <th>To
+                    <button id="2" class="headBtn" onClick="sortByHead(this)">
+                        <img src="sort-down.png">
+                    </button>
+                </th>
+                <th>Departure
+                    <button id="3" class="headBtn" onClick="sortByHead(this)">
+                        <img src="sort-down.png">
+                    </button>
+                </th>
+                <th>Arrival
+                    <button id="4" class="headBtn" onClick="sortByHead(this)">
+                        <img src="sort-down.png">
+                    </button>
+                </th>
+                <th>By
+                    <button id="5" class="headBtn" onClick="sortByHead(this)">
+                        <img src="sort-down.png">
+                    </button>
+                </th>
+            </tr>
+        </thead>
         <tbody></tbody>
     </table>
     <script src="app.js"></script>
