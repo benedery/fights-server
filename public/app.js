@@ -128,7 +128,6 @@ const searchFlightByCity = () => {
 };
 
 document.getElementById('datesBtn').addEventListener('click', () => {
-
     let fromDete = document.getElementById('from').value;
     let untilDate = document.getElementById('until').value;
     showFlightsBetweenDates(fromDete, untilDate);
