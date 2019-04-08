@@ -34,6 +34,10 @@ label{
 #until{
   margin-right: 10px;
 }
-#showAll{
-  float: right;
+#showAllBtn{
+  margin-left: 70px;
+}
+.searchByCity{
+  display: block;
+  margin-top: 20px;
 }
