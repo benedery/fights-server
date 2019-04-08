@@ -11,11 +11,6 @@ contentTypes.set('json', 'application/json');
 contentTypes.set('png', 'image/png');
 
 http.createServer(function (req, res) {
-    /* const reqUrl = url.parse(req.url);
-    const ext = reqUrl.pathname.split('.')[1];
-    const fileName = reqUrl.pathname.substr(1);
-    const cType = contentTypes.get(ext); */
-
     const reqUrl = url.parse(req.url);
     const ext = reqUrl.pathname.split('/')[1].split('.')[1];
     const fileName = reqUrl.pathname.split('/')[1];
@@ -55,4 +50,3 @@ http.createServer(function (req, res) {
 }).listen(8080, function () {
     console.log('Client is available at http://localhost:8080');
 });
-

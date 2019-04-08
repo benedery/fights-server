@@ -1,8 +1,15 @@
 'use strict';
-let flightObjectsArray = [];
+
+// flights array that are display on the table (change during run time)
+let flightsArray = [];
+
+// the origin flights array that was taken from flights.json (doesn't change)
+let flightsArrayOrigin = [];
+
 let imageSrc = 'sort-down.png';
 const HEAD_NAMES = ['id', 'from', 'to', 'departure', 'arrival', 'by'];
 
+// a function that are send as a parameter to the sort function that defines the sort order
 const compareByHeadName = (headName) => {
     return function (a, b) {
         let headNameA = a[headName].toUpperCase();
@@ -57,71 +64,77 @@ const createTableBody = (flights) => {
     document.querySelector('tbody').innerHTML = TableBody;
 };
 
-const setFlightsBetweenDates = (from, until) => {
+// show all flights that departure between the two dates that the user insert
+// the flights data is taken from the origin json file and not necessarily from the table that are currently display
+const showFlightsBetweenDates = (from, until) => {
     document.querySelector('tbody').innerHTML = ``;
     let flightsBetweenDates = [];
-    flightObjectsArray.forEach(flight => {
+    flightsArray = [...flightsArrayOrigin];
+    flightsArray.forEach(flight => {
         if (flight.departure >= from && flight.departure <= until) {
             flightsBetweenDates = [...flightsBetweenDates, flight];
         }
     });
-    flightObjectsArray = [...flightsBetweenDates];
+    flightsArray = [...flightsBetweenDates];
     document.querySelector('tbody').innerHTML = ``;
     createTableBody(flightsBetweenDates);
 };
 
+// sort a table Column in ascending or descending order by the table haed name that was clicked
+// the sorting is execute on the flights that are currently display on the table
 function sortByHead(elemnt) {
-    if (flightObjectsArray.length === 0)
+    if (flightsArray.length === 0)
         return;
 
     let headName = HEAD_NAMES[elemnt.id];
-    flightObjectsArray.sort(compareByHeadName(headName));
+    flightsArray.sort(compareByHeadName(headName));
     imageSrc = changeImageSource();
     setHeadImageSource();
     document.querySelector('tbody').innerHTML = ``;
-    createTableBody(flightObjectsArray);
+    createTableBody(flightsArray);
 }
 
-document.getElementById('datesBtn').addEventListener('click', () => {
-    let fromDete = document.getElementById('from').value;
-    let untilDate = document.getElementById('until').value;
-    setFlightsBetweenDates(fromDete, untilDate);
-});
-
 const showAllflights = () => {
-    flightObjectsArray = [];
+    flightsArray = [];
 
     fetch('flights.json')
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            flightObjectsArray = [...myJson];
+            flightsArrayOrigin = [...myJson];
+            flightsArray = [...myJson];
             setTableColumnSize();
-            createTableBody(flightObjectsArray);
-
+            createTableBody(flightsArray);
         });
 };
 
-const searchByCity = () => {
+// show all flights that are from or to, of the searched city
+// the flights data is taken from the origin json file and not necessarily from the table that are currently display
+const searchFlightByCity = () => {
     let cityName = document.getElementById('searchInput').value;
     cityName = cityName.replace(' ', '-');
     let query = `/?search=${cityName}`;
-    flightObjectsArray = [];
+    flightsArray = [];
 
     fetch('flights.json' + query)
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            flightObjectsArray = [...myJson];
-            createTableBody(flightObjectsArray);
-
+            flightsArray = [...myJson];
+            createTableBody(flightsArray);
         });
 };
 
+document.getElementById('datesBtn').addEventListener('click', () => {
+
+    let fromDete = document.getElementById('from').value;
+    let untilDate = document.getElementById('until').value;
+    showFlightsBetweenDates(fromDete, untilDate);
+});
+
 document.getElementById('showAllBtn').addEventListener('click', showAllflights);
-document.getElementById('searchBtn').addEventListener('click', searchByCity);
+document.getElementById('searchBtn').addEventListener('click', searchFlightByCity);
 
 showAllflights();
-
