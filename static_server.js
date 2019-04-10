@@ -12,8 +12,8 @@ contentTypes.set('png', 'image/png');
 
 http.createServer(function (req, res) {
     const reqUrl = url.parse(req.url);
-    const ext = reqUrl.pathname.split('/')[1].split('.')[1];
-    const fileName = reqUrl.pathname.split('/')[1];
+    const ext = reqUrl.pathname.split('.')[1];
+    const fileName = reqUrl.pathname.substr(1);
     const cType = contentTypes.get(ext);
 
     fs.readFile('public/' + fileName, function (err, data) {
@@ -29,13 +29,13 @@ http.createServer(function (req, res) {
         } else {
             res.writeHead(200, { 'Content-Type': cType });
             if (cType === "application/json") {
-                let newObj = fs.readFileSync('public/' + fileName, 'utf8').toLowerCase();
+                let newObj = fs.readFileSync('public/' + fileName, 'utf8');
                 let obj = JSON.parse(newObj);
                 if (reqUrl.search !== null) {
                     let searchUrl = reqUrl.search.split("?search=")[1].toLowerCase();
                     let foundByquery = [];
                     for (let i = 0; i < obj.length; i++) {
-                        if (obj[i].from === searchUrl || obj[i].to === searchUrl) {
+                        if (obj[i].from.toLowerCase() === searchUrl || obj[i].to.toLowerCase() === searchUrl) {
                             foundByquery.push(obj[i]);
                         }
                     }

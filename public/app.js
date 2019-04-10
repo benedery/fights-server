@@ -21,8 +21,7 @@ const compareByHeadName = (headName) => {
             } else if (headNameA < headNameB) {
                 comparison = -1;
             }
-        }
-        else if (imageSrc === 'sort-up.png') {
+        } else if (imageSrc === 'sort-up.png') {
             if (headNameA < headNameB) {
                 comparison = 1;
             } else if (headNameA > headNameB) {
@@ -114,7 +113,7 @@ const showAllflights = () => {
 const searchFlightByCity = () => {
     let cityName = document.getElementById('searchInput').value;
     cityName = cityName.replace(' ', '-');
-    let query = `/?search=${cityName}`;
+    let query = `?search=${cityName}`;
     flightsArray = [];
 
     fetch('flights.json' + query)
